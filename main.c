@@ -1,67 +1,57 @@
 #include <stdio.h>
 #include <string.h>
 
-typedef enum {
-  NIL = 0,
-  SPACE,
-  H,
-  HA,
-  HO,
-  HEN,
-} STATE;
-
-int isSpace(int c)
+isSpace(c)
 {
   return (c < 'A' || c > 'z');
 }
 
-int main()
+#define foo(x) printf("%.*s", x, *buff)
+#define bar(x) memset(*buff, 0, x)
+
+main(int i, char**buff)
 {
-  char buf[3];
-  int i;
-  
-  memset(buf, 0, 3);
+  bar(3);
 
   while((i = getchar()) != EOF) {
 
-    if(isSpace(buf[0])) { // Space
+    if(isSpace(**buff)) { // Space
       if(isSpace(i))
-	buf[0] = i;
-      else if(i == 'h' || i == 'H') {
-	memset(buf, 0, 3);
-	buf[0] = i;
-      }
+	**buff = i;
+      else if(i == 'h' || i == 'H') 
+	bar(3), **buff = i;
+      
+    } else if(2[*buff] != 0) { // HEN
 
-    } else if(buf[2] != 0) { // HEN
+      isSpace(i) && (
+	1[*buff] = 1[*buff] < 'Z' ? 'E' : 'e',
+	foo(3),
+	bar(3),
+	**buff = i);
+      
 
-      if(isSpace(i)) {
-	buf[1] = buf[1] < 'Z' ? 'E' : 'e';
-	printf("%.*s", 3, buf);
-	memset(buf, 0, 3);
-	buf[0] = i;
-      }
-
-    } else if(buf[1] != 0) { // HA, HO
+    } else if(1[*buff] != 0) { // HA, HO
 
       if(i == 'n' || i == 'N')
-	buf[2] = i;
-      else {
-	printf("%.*s", 2, buf);
-	memset(buf, 0, 3);
-      }
+	2[*buff] = i;
+      else 
+	foo(2),
+	  bar(3);
 
-    } else if(buf[0] == 'h' || buf[0] == 'H') { // H
+      
 
-      if(i == 'o' || i == 'a' || i == 'O' || i == 'A') {
-	buf[1] = i;
-      } else {
-	printf("%.*s", 1, buf);
-	buf[0] = 0;
-      }
+    } else if(**buff == 'h' || **buff == 'H') { // H
+
+      if(i == 'o' || i == 'a' || i == 'O' || i == 'A') 
+	1[*buff] = i;
+      else 
+	foo(1),
+	  **buff = 0;
+      
 
     }
 
-    if(isSpace(buf[0]))
+    if(isSpace(**buff))
       putchar(i);
 
     /*
