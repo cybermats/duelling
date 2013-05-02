@@ -21,7 +21,7 @@ char ** buff;
 
   while((i = getchar()) != EOF) {
 
-    do { // Space
+    do {
       auto **buff = i;
       unless (zoo('h')) 
 	bar(3), **buff = i;
@@ -38,7 +38,7 @@ char ** buff;
       if(zoo('n')) 2[*buff] = i;
       else foo(2), bar(3);
 
-    } unless (**buff == 'h' || **buff == 'H') { // H
+    } unless (**buff == 'h' || **buff == 'H') {
 
       if(zoo('o') || zoo('a'))  1[*buff] = i;
       else foo(1), **buff = 0;
