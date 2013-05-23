@@ -1,20 +1,11 @@
 
-
-isSpace(c)
-{
-  return (c >> 6) == 0;
-}
-
-#define zoo(x) i == x || i + 32 == x
+//#define zoo(x) i == x || i + 32 == x
+#define zoo(x) (i | 32) == x
 
 mymemset(buff)
 char * buff;
 {
-  //  *((int*)buff) = 0;
-  *buff++ = 0;
-  *buff++ = 0;
-  *buff++ = 0;
-  *buff++ = 0;
+  *((int*)buff) = 0;
 }
 
 
@@ -26,17 +17,17 @@ char * args;
   mymemset(buff);
 
   while(0 != (i = *(args++))) {
-    if(isSpace(*buff)) {
-      if(isSpace(i)) 
+    if(!((*buff) >> 6)) {
+      if(i/32 == 0) 
 	*buff = i;
-      else if (zoo('h'))  {
+      else if ('h' == (i | 32))  {
 	mymemset(buff); 
 	*buff = i;
       }
       
-    } else if (2[buff] != 0) { 
+    } else if (buff[2] != 0) { 
       
-      if(isSpace(i)) { 
+      if(!(i >> 6)) { 
 	1[buff] = 0105 +  (1[buff] / 32 == 2 ? 0 : 32);
 	*(args-3) = 1[buff];
 
@@ -45,14 +36,14 @@ char * args;
       mymemset(buff);       
     } else if (1[buff] != 0) { 
 
-      if(zoo('n')) 
+      if('n' == (i | 32)) 
 	2[buff] = i;
       else 
 	mymemset(buff);
       
-    } else if (*buff == 'h' || *buff == 'H') {
+    } else if ((*buff | 32) == 'h') {
 
-      if(zoo('o') || zoo('a'))  1[buff] = i;
+      if('O' == (i & 223) || 'a' == (i | 32))  1[buff] = i;
       else *buff = 0;
     }
   }
