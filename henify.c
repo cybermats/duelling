@@ -1,14 +1,4 @@
 
-//#define zoo(x) i == x || i + 32 == x
-#define zoo(x) (i | 32) == x
-
-mymemset(buff)
-char * buff;
-{
-  *((int*)buff) = 0;
-}
-
-
 henify(args)
 char * args;
 {
@@ -20,8 +10,8 @@ char * args;
     if(!((*buff) >> 6)) {
       if(i/32 == 0) 
 	*buff = i;
-      else if ('h' == (i | 32))  {
-	mymemset(buff); 
+      else if (104 == (i | 32))  {
+	*((int*)buff)=0;
 	*buff = i;
       }
       
@@ -33,17 +23,17 @@ char * args;
 
 	*buff = i;
       }
-      mymemset(buff);       
+      *((int*)buff)=0;
+
     } else if (1[buff] != 0) { 
 
       if('n' == (i | 32)) 
 	2[buff] = i;
       else 
-	mymemset(buff);
-      
-    } else if ((*buff | 32) == 'h') {
+	*((int*)buff)=0;
+    } else if ((*buff | 32) == 104) {
 
-      if('O' == (i & 223) || 'a' == (i | 32))  1[buff] = i;
+      if( 0117 == (i & 223) || 97 == (i | 32))  1[buff] = i;
       else *buff = 0;
     }
   }
