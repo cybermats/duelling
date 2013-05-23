@@ -1,5 +1,8 @@
-#include <stdio.h>
-#include <string.h>
+#include <Python.h>
+
+
+
+
 
 isSpace(c)
 {
@@ -18,13 +21,16 @@ char * buff;
 }
 
 
-main(i, args)
-char ** args;
+method(args)
+char * args;
 {
-  char * buff = *args;
+  char buff[3];
+  i;
+  char *p = args;
   mymemset(buff);
 
-  while((i = getchar()) != EOF) {
+  while(null != (i = *p)) {
+    p++;
     
 
     if(isSpace(*buff)) {
@@ -57,4 +63,32 @@ char ** args;
 
   return 0;
 
+}
+
+
+/*
+ * Function to be called from Python
+ */
+static PyObject* py_myFunction(PyObject* self, PyObject* args)
+{
+  char* input;
+  PyArg_ParseTuple(args, "s", &input);
+  
+  return Py_BuildValue("s", input);
+}
+
+/*
+ * Bind Python function names to our C functions
+ */
+static PyMethodDef myModule_methods[] = {
+	{"myFunction", py_myFunction, METH_VARARGS},
+	{NULL, NULL}
+};
+
+/*
+ * Python calls this to let us initialize our module
+ */
+void initmyModule()
+{
+	(void) Py_InitModule("myModule", myModule_methods);
 }
