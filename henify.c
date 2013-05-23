@@ -1,8 +1,5 @@
-#include <stdio.h>
-#include <string.h>
-#include "henify.h"
 
-/*
+
 isSpace(c)
 {
   return (c >> 6) == 0;
@@ -13,19 +10,22 @@ isSpace(c)
 mymemset(buff)
 char * buff;
 {
-  *((int*)buff) = 0;
+  //  *((int*)buff) = 0;
+  *buff++ = 0;
+  *buff++ = 0;
+  *buff++ = 0;
+  *buff++ = 0;
 }
 
 
 henify(args)
 char * args;
 {
+  int i;
   char buff[4];
-  i;
-  char *p = args;
   mymemset(buff);
 
-  while(0 != (i = *(p++))) {
+  while(0 != (i = *(args++))) {
     if(isSpace(*buff)) {
       if(isSpace(i)) 
 	*buff = i;
@@ -38,11 +38,11 @@ char * args;
       
       if(isSpace(i)) { 
 	1[buff] = 0105 +  (1[buff] / 32 == 2 ? 0 : 32);
-	*(p-3) = 1[buff];
-	mymemset(buff); 
+	*(args-3) = 1[buff];
+
 	*buff = i;
       }
-      
+      mymemset(buff);       
     } else if (1[buff] != 0) { 
 
       if(zoo('n')) 
@@ -57,12 +57,4 @@ char * args;
     }
   }
 }
-*/
 
-int main(int argc, char** argv)
-{
-  if(argc < 2)
-    return -1;
-  henify(argv[1]);
-  printf("%s\n", argv[1]);
-}
