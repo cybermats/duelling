@@ -1,41 +1,41 @@
 
-henify(args)
-char * args;
+henify(a)
+char * a;
 {
-  int i;
-  char buff[4];
-  mymemset(buff);
+  char b[4];
+  *((int*)b)=0;
 
-  while(0 != (i = *(args++))) {
-    if(!((*buff) >> 6)) {
-      if(i/32 == 0) 
-	*buff = i;
-      else if (104 == (i | 32))  {
-	*((int*)buff)=0;
-	*buff = i;
+  while(0 != *a) {
+    if(!((*b) >> 6)) {
+      if(*a/32 == 0) 
+	*b = *a;
+      else if (104 == (*a | 32))  {
+	*((int*)b)=0;
+	*b = *a;
       }
       
-    } else if (buff[2] != 0) { 
+    } else if (b[2] != 0) { 
       
-      if(!(i >> 6)) { 
-	1[buff] = 0105 +  (1[buff] / 32 == 2 ? 0 : 32);
-	*(args-3) = 1[buff];
+      if(!(*a >> 6)) { 
+	1[b] = 0105 +  (1[b] / 32 == 2 ? 0 : 32);
+	*(a-2) = 1[b];
 
-	*buff = i;
+	*b = *a;
       }
-      *((int*)buff)=0;
+      *((int*)b)=0;
 
-    } else if (1[buff] != 0) { 
+    } else if (1[b] != 0) { 
 
-      if('n' == (i | 32)) 
-	2[buff] = i;
+      if(0116 == (*a & 223)) 
+	2[b] = *a;
       else 
-	*((int*)buff)=0;
-    } else if ((*buff | 32) == 104) {
+	*((int*)b)=0;
+    } else if ((*b | 32) == 104) {
 
-      if( 0117 == (i & 223) || 97 == (i | 32))  1[buff] = i;
-      else *buff = 0;
+      if( 0117 == (*a & 223) || 97 == (*a | 32))  1[b] = *a;
+      else *b = 0;
     }
+    a++;
   }
 }
 
